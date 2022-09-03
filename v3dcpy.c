@@ -4,8 +4,8 @@
 
 #define VK(f) \
 do { \
-    VkResult res = vk##f; \
-    if (res < VK_SUCCESS) \
+	VkResult res = vk##f; \
+	if (res < VK_SUCCESS) \
 		fprintf(stderr, "%d: %s\n", res, "vk" #f); \
 } while (0)
 
@@ -27,7 +27,7 @@ int main() {
 	VK(CreateInstance(
 		&(VkInstanceCreateInfo) {
 			.sType = VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO,
-			.enabledLayerCount = 1,
+			.enabledLayerCount = 0,
 			.ppEnabledLayerNames = (char const *[]) {"VK_LAYER_KHRONOS_validation"}
 		},
 		NULL,
@@ -188,10 +188,18 @@ int main() {
 				.layerCount = 1
 			},
 			.extent = {
-				.width = 64,
-				.height = 64,
+				.width = 32,
+				.height = 32,
 				.depth = 1
 			},
+			.srcOffset = {
+				.x = 16,
+				.y = 8
+			},
+			.dstOffset = {
+				.x = 8,
+				.y = 16
+			}
 		}
 	);
 
